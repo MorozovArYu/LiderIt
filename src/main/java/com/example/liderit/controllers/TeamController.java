@@ -30,11 +30,7 @@ public class TeamController {
 
     @PutMapping("/{id}")
     ResponseEntity<Team> putTeam(@PathVariable Integer id, @RequestBody Team team) {
-        //FIXME: не работает изменение данных. Возвращается 201, но сами данные не меняются
-
-        // Если объект существует, меняем его и возвращаем 200, если нет, то 201
-        return teamService.getTeam(id).map(value -> new ResponseEntity<>(teamService.addTeam(value), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(postTeam(team), HttpStatus.CREATED));
+        return teamService.putTeam(team,id);
     }
 
     @DeleteMapping("/{id}")
