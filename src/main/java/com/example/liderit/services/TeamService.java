@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.temporal.Temporal;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,11 +17,11 @@ public class TeamService {
         this.teamRepository = teamRepository;
     }
 
-    public Team addTeam(Team team) {
+    public Team postTeam(Team team) {
         return teamRepository.saveAndFlush(team);
     }
 
-    public Optional<Team> getTeam(Integer id) {
+    public Optional<Team> findTeamById(Integer id) {
         return teamRepository.findById(id);
     }
 
@@ -40,7 +39,6 @@ public class TeamService {
             return new ResponseEntity<>(teamRepository.saveAndFlush(team),HttpStatus.OK);
         }
         return new ResponseEntity<>(teamRepository.saveAndFlush(team), HttpStatus.CREATED);
-
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.liderit.models;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -10,12 +11,14 @@ public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "name")
     private String name;
     @Column(name = "sport_kind")
     private String sportKind;
     @Column(name = "creation_date")
     private LocalDate creationDate;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
+    private List<Player> playerList;
 
     public Team(String name, String sportKind, LocalDate creationDate) {
         this.name = name;

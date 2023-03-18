@@ -2,12 +2,10 @@ package com.example.liderit.controllers;
 
 import com.example.liderit.models.Team;
 import com.example.liderit.services.TeamService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/sport/teams")
@@ -25,7 +23,7 @@ public class TeamController {
 
     @PostMapping
     Team postTeam(@RequestBody Team newTeam) {
-        return teamService.addTeam(newTeam);
+        return teamService.postTeam(newTeam);
     }
 
     @PutMapping("/{id}")
