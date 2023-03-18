@@ -1,9 +1,12 @@
 package com.example.liderit.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Entity
 @Table(name = "teams")
@@ -18,6 +21,7 @@ public class Team {
     private LocalDate creationDate;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
+    @JsonIgnore
     private List<Player> playerList;
 
     public Team(String name, String sportKind, LocalDate creationDate) {
@@ -62,6 +66,25 @@ public class Team {
         this.creationDate = creationDate;
     }
 
+    public List<Player> getPlayerList() {
+        return playerList;
+    }
+
+    public void setPlayerList(List<Player> playerList) {
+        this.playerList = playerList;
+    }
+
+    public void addPlayerToList(Player player){
+        this.playerList.add(player);
+    }
+
+    public Optional<Player> getPlayerFromListById(Integer id){
+        for (Player player : this.playerList) {
+            if (player.getId() == id) return Optional.of(player);
+        }
+        return Optional.empty();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,8 +105,7 @@ public class Team {
                 ", name='" + name + '\'' +
                 ", sportKind='" + sportKind + '\'' +
                 ", creationDate=" + creationDate +
+                ", playerList=" + playerList +
                 '}';
     }
-
-
 }

@@ -1,5 +1,7 @@
 package com.example.liderit.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -16,8 +18,9 @@ public class Player {
     @Column(name = "birth_date")
     private LocalDate birthDate;
     private String role;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "team_id")
+    @JsonIgnore
     private Team team;
 
     public Player() {
@@ -82,6 +85,14 @@ public class Player {
         this.role = role;
     }
 
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -100,7 +111,6 @@ public class Player {
     public String toString() {
         return "Player{" +
                 "id=" + id +
-                /*", teamId=" + teamId +*/
                 ", surname='" + surname + '\'' +
                 ", name='" + name + '\'' +
                 ", patronymic='" + patronymic + '\'' +
@@ -108,6 +118,5 @@ public class Player {
                 ", role='" + role + '\'' +
                 '}';
     }
-
 
 }

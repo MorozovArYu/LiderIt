@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TeamService {
@@ -17,28 +17,34 @@ public class TeamService {
         this.teamRepository = teamRepository;
     }
 
-    public Team postTeam(Team team) {
-        return teamRepository.saveAndFlush(team);
-    }
-
-    public Optional<Team> findTeamById(Integer id) {
-        return teamRepository.findById(id);
-    }
-
-    public void deleteTeam(Integer id) {
-        teamRepository.deleteById(id);
-    }
-
     public List<Team> findAll() {
         return teamRepository.findAll();
     }
 
-    public ResponseEntity<Team> putTeam(Team team, Integer id) {
-        if (teamRepository.existsById(id)) {
-            team.setId(id);
-            return new ResponseEntity<>(teamRepository.saveAndFlush(team),HttpStatus.OK);
-        }
-        return new ResponseEntity<>(teamRepository.saveAndFlush(team), HttpStatus.CREATED);
+    public List<Team> findAllFilteredBySportKind(String sportKind) {
+        return teamRepository.findAllBySportKind(sportKind);
     }
 
+    public List<Team> findAllFilteredByCreationDate(LocalDate startDate, LocalDate endDate) {
+        System.out.println(startDate);
+        System.out.println(endDate);
+        return teamRepository.findAllByCreationDateBetween(startDate, endDate);
+    }
+
+
+    public Team postTeam(Team team) {
+        return teamRepository.saveAndFlush(team);
+    }
+
+    public ResponseEntity<Team> putTeamById(Integer teamId, Team team) {
+        if (!teamRepository.existsById(teamId)) {
+            return new ResponseEntity<>(teamRepository.saveAndFlush(team), HttpStatus.CREATED);
+        }
+        team.setId(teamId);
+        return new ResponseEntity<>(teamRepository.saveAndFlush(team),HttpStatus.OK);
+    }
+
+    public void deleteTeamById(Integer teamId) {
+        teamRepository.deleteById(teamId);
+    }
 }
