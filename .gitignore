@@ -1,4 +1,4 @@
-*cleartest.sql
+src/main/resources/database/resetDB.sql
 documents
 HELP.md
 target/

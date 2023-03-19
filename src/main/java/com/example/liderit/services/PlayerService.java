@@ -1,19 +1,23 @@
 package com.example.liderit.services;
 
 
-import com.example.liderit.exceptions_handler.exceptions.PlayerNotFoundException;
-import com.example.liderit.exceptions_handler.exceptions.TeamNotFoundException;
+import com.example.liderit.exceptions_handler.exceptions.not_found.PlayerNotFoundException;
+import com.example.liderit.exceptions_handler.exceptions.not_found.TeamNotFoundException;
 import com.example.liderit.models.abstr_model.Model;
 import com.example.liderit.models.Player;
 import com.example.liderit.models.Team;
 import com.example.liderit.repository.PlayerRepository;
 import com.example.liderit.repository.TeamRepository;
 import com.example.liderit.utils.CodeHelper;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class PlayerService {
@@ -35,10 +39,10 @@ public class PlayerService {
         Team team = teamRepository.findById(newTeamId).orElseThrow(() -> new TeamNotFoundException(newTeamId));
         Player player = playerRepository.findById(playerId).orElseThrow(() ->new PlayerNotFoundException(playerId));
         player.setTeam(team);
-        return new ResponseEntity<>(playerRepository.saveAndFlush(player).getTeam(), HttpStatus.OK);
+        return new ResponseEntity<>(playerRepository.saveAndFlush(player).getTeam(),HttpStatus.OK);
     }
 
-    public ResponseEntity<Model> putPlayerByPlayerId(Integer playerId, Player player) {
+    public ResponseEntity<Player> putPlayerByPlayerId(Integer playerId, Player player) {
         Player currentPlayer = playerRepository.findById(playerId).orElseThrow(() -> new PlayerNotFoundException(playerId));
         player.setId(playerId);
         player.setTeam(currentPlayer.getTeam());

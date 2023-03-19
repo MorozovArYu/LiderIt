@@ -1,7 +1,6 @@
 package com.example.liderit.services;
 
-import com.example.liderit.exceptions_handler.exceptions.PlayerNotFoundException;
-import com.example.liderit.exceptions_handler.exceptions.TeamNotFoundException;
+import com.example.liderit.exceptions_handler.exceptions.not_found.TeamNotFoundException;
 import com.example.liderit.models.Team;
 import com.example.liderit.repository.TeamRepository;
 import org.springframework.http.HttpStatus;
@@ -28,8 +27,6 @@ public class TeamService {
     }
 
     public List<Team> findAllFilteredByCreationDate(LocalDate startDate, LocalDate endDate) {
-        System.out.println(startDate);
-        System.out.println(endDate);
         return teamRepository.findAllByCreationDateBetween(startDate, endDate);
     }
 

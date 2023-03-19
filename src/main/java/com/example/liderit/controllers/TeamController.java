@@ -1,5 +1,6 @@
 package com.example.liderit.controllers;
 
+import com.example.liderit.exceptions_handler.exceptions.param.WrongDateParameterException;
 import com.example.liderit.models.Team;
 import com.example.liderit.services.TeamService;
 import com.example.liderit.utils.CodeHelper;
@@ -33,9 +34,11 @@ public class TeamController {
     @GetMapping("/filters/dates")
     public ResponseEntity<Collection<Team>> getFilteredTeamsByCreationDate(
             @RequestParam(name = "startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
-            @RequestParam(name = "endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
-        System.out.println(startDate);
-        System.out.println(endDate);
+            @RequestParam(name = "endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate
+            ) {
+        System.out.println("message");
+        if (endDate.isBefore(startDate)) throw new WrongDateParameterException("The endDate cannot be earlier than the startDate", endDate,startDate);
+
         return CodeHelper.checkForEmpty(teamService.findAllFilteredByCreationDate(startDate, endDate));
     }
 
@@ -43,6 +46,7 @@ public class TeamController {
     public ResponseEntity<Team> postTeam(@RequestBody Team team) {
         return new ResponseEntity<>(teamService.postTeam(team), HttpStatus.CREATED);
     }
+
 
     @PutMapping("/{teamId}")
     public ResponseEntity<Team> putTeam(@PathVariable Integer teamId, @RequestBody Team team) {

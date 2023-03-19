@@ -1,13 +1,16 @@
 package com.example.liderit.controllers;
 
+import com.example.liderit.models.Team;
 import com.example.liderit.models.abstr_model.Model;
 import com.example.liderit.models.Player;
 import com.example.liderit.services.PlayerService;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.Objects;
 
 @RestController
@@ -18,6 +21,7 @@ public class PlayerController {
     PlayerController(PlayerService playerService) {
         this.playerService = playerService;
     }
+
 
 
     @GetMapping("/{teamId}")
@@ -40,14 +44,16 @@ public class PlayerController {
 
 
     @PutMapping("/{playerId}")
-    public ResponseEntity<? extends Model> changePlayerByPlayerId(@PathVariable Integer playerId,
-                                                                @RequestParam(name = "newTeamId",
-                                                           required = false) Integer newTeamId,
-                                                                @RequestBody Player player) {
-        if (Objects.isNull(newTeamId)) return playerService.putPlayerByPlayerId(playerId, player);
-        return playerService.changePlayerTeamByPlayerId(playerId, newTeamId);
+    public ResponseEntity<Player> changePlayerByPlayerId(@PathVariable Integer playerId,
+                                                         @RequestBody Player player) {
+        return playerService.putPlayerByPlayerId(playerId, player);
     }
 
+    @PatchMapping("/{playerId}")
+    public ResponseEntity<Team> changePlayerByPlayerTeam(@PathVariable Integer playerId,
+                                                                      @RequestParam(name = "newTeamId") Integer newTeamId) {
+        return playerService.changePlayerTeamByPlayerId(playerId, newTeamId);
+    }
 
     @DeleteMapping("/{playerId}")
     public ResponseEntity<HttpStatus> deletePlayer(@PathVariable Integer playerId) {
