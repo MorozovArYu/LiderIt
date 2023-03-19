@@ -1,5 +1,6 @@
 package com.example.liderit.models;
 
+import com.example.liderit.models.abstr_model.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import java.util.Optional;
 
 @Entity
 @Table(name = "teams")
-public class Team {
+public class Team extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -23,12 +24,6 @@ public class Team {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
     @JsonIgnore
     private List<Player> playerList;
-
-    public Team(String name, String sportKind, LocalDate creationDate) {
-        this.name = name;
-        this.sportKind = sportKind;
-        this.creationDate = creationDate;
-    }
 
     public Team() {
 

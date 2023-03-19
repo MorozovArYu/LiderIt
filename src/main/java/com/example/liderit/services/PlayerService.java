@@ -3,6 +3,7 @@ package com.example.liderit.services;
 
 import com.example.liderit.exceptions_handler.exceptions.PlayerNotFoundException;
 import com.example.liderit.exceptions_handler.exceptions.TeamNotFoundException;
+import com.example.liderit.models.abstr_model.Model;
 import com.example.liderit.models.Player;
 import com.example.liderit.models.Team;
 import com.example.liderit.repository.PlayerRepository;
@@ -13,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.Optional;
 
 @Service
 public class PlayerService {
@@ -25,30 +25,28 @@ public class PlayerService {
         this.teamRepository = teamRepository;
     }
 
-    public ResponseEntity<Player> postPlayerById(Integer teamId, Player player) {
-        Optional<Team> teamOpt = teamRepository.findById(teamId);
-        Team team = teamOpt.orElseThrow(() -> new TeamNotFoundException(teamId));
-        team.addPlayerToList(player);
-        teamRepository.saveAndFlush(team);
-        return new ResponseEntity<>(player, HttpStatus.CREATED);
+    public ResponseEntity<Player> postPlayerByTeamId(Integer teamId, Player player) {
+        Team team = teamRepository.findById(teamId).orElseThrow(() -> new TeamNotFoundException(teamId));
+        player.setTeam(team);
+        return new ResponseEntity<>(playerRepository.saveAndFlush(player), HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Player> changePlayerTeam(Integer playerId, Integer newTeamId) {
+    public ResponseEntity<Team> changePlayerTeamByPlayerId(Integer playerId, Integer newTeamId) {
         Team team = teamRepository.findById(newTeamId).orElseThrow(() -> new TeamNotFoundException(newTeamId));
         Player player = playerRepository.findById(playerId).orElseThrow(() ->new PlayerNotFoundException(playerId));
         player.setTeam(team);
-        return new ResponseEntity<>(playerRepository.saveAndFlush(player), HttpStatus.OK);
+        return new ResponseEntity<>(playerRepository.saveAndFlush(player).getTeam(), HttpStatus.OK);
     }
 
-    public ResponseEntity<Player> putPlayerById(Integer playerId, Player player) {
-        if (!playerRepository.existsById(playerId)) {
-            return new ResponseEntity<>(playerRepository.saveAndFlush(player), HttpStatus.CREATED);
-        }
+    public ResponseEntity<Model> putPlayerByPlayerId(Integer playerId, Player player) {
+        Player currentPlayer = playerRepository.findById(playerId).orElseThrow(() -> new PlayerNotFoundException(playerId));
         player.setId(playerId);
+        player.setTeam(currentPlayer.getTeam());
         return new ResponseEntity<>(playerRepository.saveAndFlush(player), HttpStatus.OK);
     }
 
     public void deletePlayerById(Integer playerId) {
+        if (!playerRepository.existsById(playerId)) throw new PlayerNotFoundException(playerId);
         playerRepository.deleteById(playerId);
     }
 
@@ -57,6 +55,7 @@ public class PlayerService {
     }
 
     public ResponseEntity<Collection<Player>> getPlayersFromTeamByTeamIdFilteredByRole(Integer teamId, String role) {
+        if (!teamRepository.existsById(teamId)) throw new TeamNotFoundException(teamId);
         return CodeHelper.checkForEmpty(playerRepository.getPlayersFromTeamByTeamIdFilteredByRole(teamId, role));
     }
 

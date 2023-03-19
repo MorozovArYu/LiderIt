@@ -1,5 +1,6 @@
 package com.example.liderit.controllers;
 
+import com.example.liderit.models.abstr_model.Model;
 import com.example.liderit.models.Player;
 import com.example.liderit.services.PlayerService;
 import org.springframework.http.HttpStatus;
@@ -31,32 +32,25 @@ public class PlayerController {
     }
 
 
-    /*FIXME При отправке post запроса создается игрок,
-     *       но team_id не добавляется, возвращается ответ:
-     *       201 (Created) значение игрока с id 0*/
     @PostMapping("/{teamId}")
     public ResponseEntity<Player> postPlayer(@RequestBody Player player,
                                              @PathVariable Integer teamId) {
-        return playerService.postPlayerById(teamId, player);
+        return playerService.postPlayerByTeamId(teamId, player);
     }
 
-    /*FIXME при отправке запроса с несуществующим player id создает
-     *      нового игрока, а должен выбрасывать PlayerNotFound
-     *    */
+
     @PutMapping("/{playerId}")
-    public ResponseEntity<Player> changePlayerTeam(@PathVariable Integer playerId,
-                                                   @RequestParam(name = "newTeamId",
+    public ResponseEntity<? extends Model> changePlayerByPlayerId(@PathVariable Integer playerId,
+                                                                @RequestParam(name = "newTeamId",
                                                            required = false) Integer newTeamId,
-                                                   @RequestBody Player player) {
-        if (Objects.isNull(newTeamId)) return playerService.putPlayerById(playerId, player);
-        return playerService.changePlayerTeam(playerId, newTeamId);
+                                                                @RequestBody Player player) {
+        if (Objects.isNull(newTeamId)) return playerService.putPlayerByPlayerId(playerId, player);
+        return playerService.changePlayerTeamByPlayerId(playerId, newTeamId);
     }
 
-    /*FIXME Если указать несуществующий id, то возвращается
-     *       500 (INTERNAL ERROR), а должна PlayerNotFound (или
-     *       PlayerNotExist)*/
+
     @DeleteMapping("/{playerId}")
-    public ResponseEntity<HttpStatus> deleteTeam(@PathVariable Integer playerId) {
+    public ResponseEntity<HttpStatus> deletePlayer(@PathVariable Integer playerId) {
         playerService.deletePlayerById(playerId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

@@ -15,10 +15,6 @@ import java.util.List;
 @Repository
 public interface PlayerRepository extends JpaRepository<Player, Integer> {
     @Query(nativeQuery = true,
-            value = "select * from players where team_id = :teamId")
-    List<Player> getPlayersFromTeamByTeamId(@Param("teamId") Integer teamId);
-
-    @Query(nativeQuery = true,
             value = "select * from players where team_id = :teamId and role = :role ")
     List<Player> getPlayersFromTeamByTeamIdFilteredByRole(@Param("teamId")Integer teamId, @Param("role")String role);
 

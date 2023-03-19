@@ -1,5 +1,7 @@
 package com.example.liderit.services;
 
+import com.example.liderit.exceptions_handler.exceptions.PlayerNotFoundException;
+import com.example.liderit.exceptions_handler.exceptions.TeamNotFoundException;
 import com.example.liderit.models.Team;
 import com.example.liderit.repository.TeamRepository;
 import org.springframework.http.HttpStatus;
@@ -45,6 +47,7 @@ public class TeamService {
     }
 
     public void deleteTeamById(Integer teamId) {
+        if (!teamRepository.existsById(teamId)) throw new TeamNotFoundException(teamId);
         teamRepository.deleteById(teamId);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.liderit.models;
 
+import com.example.liderit.models.abstr_model.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "players")
-public class Player {
+public class Player extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -18,7 +19,7 @@ public class Player {
     @Column(name = "birth_date")
     private LocalDate birthDate;
     private String role;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
     @JoinColumn(name = "team_id")
     @JsonIgnore
     private Team team;
@@ -26,15 +27,6 @@ public class Player {
     public Player() {
     }
 
-    public Player(String surname,
-                  String name, String patronymic,
-                  LocalDate birthDate, String role) {
-        this.surname = surname;
-        this.name = name;
-        this.patronymic = patronymic;
-        this.birthDate = birthDate;
-        this.role = role;
-    }
 
     public int getId() {
         return id;
