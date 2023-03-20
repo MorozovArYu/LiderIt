@@ -2,6 +2,7 @@ package com.example.liderit.models;
 
 import com.example.liderit.models.abstr_model.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,14 +12,16 @@ import java.util.Optional;
 
 @Entity
 @Table(name = "teams")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Team extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(nullable = false,unique = true)
     private String name;
-    @Column(name = "sport_kind")
+    @Column(name = "sport_kind",nullable = false)
     private String sportKind;
-    @Column(name = "creation_date")
+    @Column(name = "creation_date", nullable = false)
     private LocalDate creationDate;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")

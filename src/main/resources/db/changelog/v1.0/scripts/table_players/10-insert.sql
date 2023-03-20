@@ -1,0 +1,22 @@
+INSERT INTO players (team_id, name, surname, patronymic, birth_date, role)
+VALUES
+    (1,'Ander','Astralaga',null,'2004-03-03','Goalkeeper'),
+    (1,'Arnau','Tenas',null,'2001-05-30','Goalkeeper'),
+    (1,'Alex','Balde',null,'2003-03-18','Defender'),
+    (1,'Jordi','Alba',null,'1989-03-21','Defender'),
+    (2,'David','De Gea',null,'1990-11-07','Goalkeeper'),
+    (2,'Jadon','Sancho',null,'2000-03-25','Midfielder'),
+    (2,'Marcus','Marcus',null,'1997-10-31','Forward'),
+    (2,'Christian','Eriksen',null,'1992-02-14','Midfielder'),
+    (3,'Ferland','Mendy',null,'1995-07-08','Defender'),
+    (3,'Thibaut','Courtois',null,'1992-05-11','Goalkeeper'),
+    (3,'Mario','Martin',null,'2004-03-05','Midfielder'),
+    (3,'Karim','Benzema',null,'1987-12-19','Forward'),
+    (4,'Dmitry','Alekseev','Vitalievich','1998-02-17','Defender'),
+    (4,'Bogdan','Kiselevich','Alexandrovich','1990-02-14','Defender'),
+    (4,'Ziyat','Paygin','Asiyatovich','1995-02-08','Defender'),
+    (4,'Bushe','Rid',null,'1993-09-08','Forward'),
+    (5,'Vladislav','Podyapolsky','Dmitrievich','1995-06-04','Goalie'),
+    (5,'Evgeny','Ketov','Nikolaevich','1986-01-17','Forward'),
+    (5,'Arseny','Koromyslov','Sergeevich','2003-11-03','Forward'),
+    (5,'Alexander ','Volkov','Vladimirovich','1997-08-02','Forward');
