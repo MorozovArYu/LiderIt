@@ -3,7 +3,7 @@ CREATE TABLE public.teams
 (
     id serial NOT NULL ,
     name character varying(120) COLLATE pg_catalog."default" NOT NULL,
-    sport_kind character varying(120) COLLATE pg_catalog."default",
+    sport_kind character varying(120) COLLATE pg_catalog."default" NOT NULL ,
     creation_date date NOT NULL,
     CONSTRAINT teams_pkey PRIMARY KEY (id)
 )

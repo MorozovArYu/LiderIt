@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/sport/teams")
+@RequestMapping("/sports/teams")
 public class TeamController {
     private final TeamService teamService;
 

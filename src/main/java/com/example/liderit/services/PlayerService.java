@@ -32,6 +32,7 @@ public class PlayerService {
     public ResponseEntity<Player> postPlayerByTeamId(Integer teamId, Player player) {
         Team team = teamRepository.findById(teamId).orElseThrow(() -> new TeamNotFoundException(teamId));
         player.setTeam(team);
+        player.setId(0);
         return new ResponseEntity<>(playerRepository.saveAndFlush(player), HttpStatus.CREATED);
     }
 

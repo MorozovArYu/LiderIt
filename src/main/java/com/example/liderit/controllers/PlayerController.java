@@ -1,20 +1,16 @@
 package com.example.liderit.controllers;
 
-import com.example.liderit.models.Team;
-import com.example.liderit.models.abstr_model.Model;
 import com.example.liderit.models.Player;
+import com.example.liderit.models.Team;
 import com.example.liderit.services.PlayerService;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.Map;
-import java.util.Objects;
 
 @RestController
-@RequestMapping("/sport/players")
+@RequestMapping("/sports/players")
 public class PlayerController {
     private final PlayerService playerService;
 
