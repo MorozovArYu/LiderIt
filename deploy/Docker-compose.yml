@@ -4,6 +4,8 @@ services:
     image: torion12/liderit
     depends_on:
       - postgresql
+    ports:
+      - "8080:8080"
   postgresql:
     image: torion12/pstgr
     ports:

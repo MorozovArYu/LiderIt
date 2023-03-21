@@ -7,11 +7,16 @@ Version: 0.0.1
 ## Get Started
 
 1. Install [Docker](https://docs.docker.com/desktop/) for your operating system
-2. Download [deploy file]((deploy%2FDocker-compose.yml))
+2. Download [deploy file](https://drive.google.com/file/d/1aAd6PdPpu2Lo-8GTAthr9hyUg-cEgN1Q/view?usp=share_link)
 3. Execute the command
-    
+
+
+
 
     docker compose -f "path to downloaded file" up
+
+
+
 
 ## REST API doc
 
