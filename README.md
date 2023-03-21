@@ -4,6 +4,15 @@ Storage of sports team and players data
 
 Version: 0.0.1
 
+## Get Started
+
+1. Install [Docker](https://docs.docker.com/desktop/) for your operating system
+2. Download [deploy file]((deploy%2FDocker-compose.yml))
+3. Execute the command
+    
+
+    docker compose -f "path to downloaded file" up
+
 ## REST API doc
 
 ### <a name="ref13"></a>Table of Contents

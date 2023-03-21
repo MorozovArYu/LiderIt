@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS sport.public.players;
+DROP TABLE IF EXISTS sports.public.players CASCADE;

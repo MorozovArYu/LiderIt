@@ -1,0 +1,14 @@
+version: "3.1"
+services:
+  app:
+    image: torion12/liderit
+    depends_on:
+      - postgresql
+  postgresql:
+    image: torion12/pstgr
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_DB=sports
