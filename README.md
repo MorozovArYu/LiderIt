@@ -6,14 +6,29 @@ Version: 0.0.1
 
 ## Get Started
 
-1. Install [Docker](https://docs.docker.com/desktop/) for your operating system
+### With Docker
+1. Install [Docker](https://docs.docker.com/desktop/)
 2. Download [deploy file](https://drive.google.com/file/d/1aAd6PdPpu2Lo-8GTAthr9hyUg-cEgN1Q/view?usp=share_link)
 3. Execute the command
 
 
-
-
     docker compose -f "path to downloaded file" up
+
+
+### Manualy
+1. Install [JRE 8](https://www.oracle.com/cis/java/technologies/javase/javase8-archive-downloads.html)
+2. Install [PostgresQL](https://www.postgresqltutorial.com/postgresql-getting-started/)
+3. Execute [createUser.sql](https://github.com/MorozovArYu/TestRepo/raw/main/deploy/createUser.sql)
+4. Execute [createDB.sql](https://github.com/MorozovArYu/TestRepo/raw/main/deploy/createDB.sql)
+5. Download [LiderIt.jar](https://github.com/MorozovArYu/LiderIt/raw/main/deploy/LiderIt.jar)
+6. Excecute 
+
+
+    java -jar LiderIt.jar
+
+
+
+
 
 
 

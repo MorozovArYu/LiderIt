@@ -1,4 +1,3 @@
-src/main/resources/db/changelog/createDB.sql
 src/main/resources/database/initDB.sql
 src/main/resources/database/resetDB.sql
 documents
