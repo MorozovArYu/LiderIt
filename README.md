@@ -27,12 +27,6 @@ Version: 0.0.1
     java -jar LiderIt.jar
 
 
-
-
-
-
-
-
 ## REST API doc
 
 ### <a name="ref13"></a>Table of Contents
