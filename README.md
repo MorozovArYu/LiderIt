@@ -12,7 +12,7 @@ Version: 0.0.1
 2. Download [deploy file](https://drive.google.com/file/d/1aAd6PdPpu2Lo-8GTAthr9hyUg-cEgN1Q/view?usp=share_link)
 3. Execute the command
 
-    "docker compose -f <path to downloaded file> up"
+    "docker compose -f ^path to downloaded file^ up"
 
 ### Manualy
 
@@ -21,7 +21,7 @@ Version: 0.0.1
 3. Download [LiderIt.jar](https://github.com/MorozovArYu/LiderIt/raw/main/deploy/LiderIt.jar)
 4. Excecute:
 
-    "java -jar LiderIt.jar <user> <password>"
+    "java -jar LiderIt.jar ^user^ ^password^>"
 
 if you don't want automatically generated bd:
 
