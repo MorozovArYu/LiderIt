@@ -32,7 +32,9 @@ if you don't want automatically generated bd:
     "java -jar LiderIt.jar"
 
 ## REST API doc
+Swagger: https://app.swaggerhub.com/apis/MOROZOWAU/REST/1.0.0
 
+Alternative:
 ### <a name="ref13"></a>Table of Contents
 
 ___TEAMS:___
